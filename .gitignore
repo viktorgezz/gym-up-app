@@ -1,0 +1,35 @@
+# Dependencies (installed by `npm ci` from package-lock.json)
+node_modules/
+
+# Build output: GitHub Actions builds it on every push
+dist/
+dev-dist/
+*.tsbuildinfo
+.vite/
+.svelte-kit/
+
+# Tests
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment and local overrides
+.env
+.env.*
+!.env.example
+*.local
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Claude Code local config (dev server launch settings)
+.claude/
+
+# Reference project: a separate repository with its own .git, not part of this app
+example/

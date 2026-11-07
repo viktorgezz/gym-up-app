@@ -1,0 +1,469 @@
+:root {
+  /* Dark only: the iOS status bar (black-translucent) always draws white text. */
+  color-scheme: dark;
+
+  --bg: #0b0b0c;
+  --surface: #161618;
+  --surface-2: #222225;
+  --surface-3: #2d2d31;
+  --line: rgb(255 255 255 / 0.08);
+  --text: #f5f5f2;
+  --text-2: #a1a1a6;
+  --text-3: #808086;
+  --accent: #3ee6a8;
+  --on-accent: #04130d;
+  --accent-text: #3ee6a8;
+  --accent-soft: rgb(62 230 168 / 0.14);
+  --danger: #ff6159;
+  --gold: #ffd60a;
+  --chart: #3ee6a8;
+  --grid: rgb(255 255 255 / 0.07);
+
+  --radius: 20px;
+  --radius-sm: 12px;
+  --gutter: 16px;
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --tabbar-h: 56px;
+  /* One point of reading text: 1px at the default iOS text size, larger or smaller with
+     Dynamic Type. Big numbers and fixed-size controls stay in px. */
+  --pt: calc(1rem / 17);
+
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  --font-rounded: ui-rounded, 'SF Pro Rounded', -apple-system, system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Dynamic Type: 1rem follows the iOS text size setting; 17px is its default body size. */
+  font-size: 17px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  /* iOS only: on macOS the system body font is 13px. */
+  html {
+    font: -apple-system-body;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  overscroll-behavior: none;
+}
+
+body {
+  font-size: calc(16 * var(--pt));
+}
+
+#app {
+  height: 100dvh;
+  /* Phone on its side: keep everything clear of the notch / Dynamic Island. */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+input {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+/* Screens ------------------------------------------------------------------ */
+
+/* Tab screens on a phone in landscape: cards and text at a readable width. */
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+  padding: calc(var(--safe-top) + 12px) var(--gutter) 32px;
+}
+
+.screen.with-nav {
+  padding-top: 4px;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+}
+
+.large-title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.sub {
+  margin-top: -10px;
+}
+
+/* Text --------------------------------------------------------------------- */
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-rounded);
+}
+
+.eyebrow {
+  font-size: calc(13 * var(--pt));
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.muted {
+  color: var(--text-2);
+}
+
+.small {
+  font-size: calc(13 * var(--pt));
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Surfaces ----------------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.section-title {
+  margin: 0 0 8px 4px;
+}
+
+/* Grouped list (iOS inset grouped) */
+.group {
+  padding: 0 16px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  text-align: left;
+  font-size: calc(16 * var(--pt));
+}
+
+.item + .item {
+  border-top: 0.5px solid var(--line);
+}
+
+.item-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.item-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.chevron {
+  flex: none;
+  color: var(--text-3);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.empty h2 {
+  font-size: calc(20 * var(--pt));
+  font-weight: 700;
+}
+
+/* Buttons ------------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 600;
+  font-size: calc(16 * var(--pt));
+  transition:
+    transform 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-2);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+}
+
+.btn-lg {
+  min-height: 56px;
+  font-size: calc(17 * var(--pt));
+  border-radius: 18px;
+}
+
+.btn-sm {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 12px;
+  font-size: calc(15 * var(--pt));
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.icon-btn:active {
+  opacity: 0.7;
+}
+
+.icon-btn:disabled {
+  opacity: 0.35;
+}
+
+.icon-btn.accent {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Text button, like iOS bar buttons. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: var(--accent-text);
+  font-size: calc(17 * var(--pt));
+  font-weight: 500;
+}
+
+.link.strong {
+  font-weight: 700;
+}
+
+.link:disabled {
+  opacity: 0.35;
+}
+
+.link:active {
+  opacity: 0.6;
+}
+
+/* Inputs ------------------------------------------------------------------- */
+
+/* 16px+ text in every field: smaller text makes iOS zoom the page on focus. */
+.field {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--surface-2);
+  font-size: 17px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field::placeholder {
+  color: var(--text-3);
+}
+
+.field:focus {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.block > .eyebrow,
+.block > legend {
+  margin-left: 4px;
+}
+
+select.value-select {
+  min-height: 36px;
+  max-width: 50%;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 16px;
+  text-align: right;
+}
+
+/* Safari 17.4+ draws a native iOS switch (with haptics) for <input type="checkbox" switch>. */
+.switch[switch] {
+  flex: none;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+/* Fallback look where the native switch isn't supported. */
+.switch:not([switch]) {
+  appearance: none;
+  position: relative;
+  flex: none;
+  width: 51px;
+  height: 31px;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--surface-3);
+  transition: background 0.2s;
+}
+
+.switch:not([switch])::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.25);
+  transition: transform 0.2s;
+}
+
+.switch:not([switch]):checked {
+  background: var(--accent);
+}
+
+.switch:not([switch]):checked::after {
+  transform: translateX(20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
